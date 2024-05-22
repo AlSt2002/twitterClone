@@ -45,7 +45,7 @@ require_once "autoloader.php";
           </div>
         </nav>
 
-        <article class="tweets">
+        <article class="tweets" id="tw">
           <div class="happeningContainer border-bottom">
             <form class="whatIsHappening p-4 d-flex gap-2" id="whatIsHappening" action="AddTweet.php">
               <div class="background-profile">
@@ -420,11 +420,25 @@ require_once "autoloader.php";
         xhr.send(formData);
     }
    
-
-
-
     var postbutton = document.getElementById('post-button');
     postbutton.addEventListener('click', addTweet);
+
+
+    function showTweets() {
+      
+    }
+
+
+    window.onload = function() {
+        const parentElement = document.getElementById('tw');
+
+        let paragraph = document.createElement('p');
+        paragraph.textContent = "Example paragraph edited";
+
+        parentElement.appendChild(paragraph);
+
+       
+    }
 
   </script>
 

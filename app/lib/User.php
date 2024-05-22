@@ -2,9 +2,10 @@
 
 namespace App\Lib;
 
+use JsonSerializable;
 use PDO;
 
-class User extends Database {
+class User extends Database implements JsonSerializable {
 
 
     protected $id;
@@ -117,6 +118,12 @@ class User extends Database {
         $this->imageArray = $imageArray;
     }
 
+
+
+    public function jsonSerialize()
+    {
+        return get_object_vars($this);
+    }
 
     public function register() {
         parent::create();
