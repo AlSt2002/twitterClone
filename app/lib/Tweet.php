@@ -56,10 +56,9 @@ use PDO;
             return get_object_vars($this);
         }
 
-
-
+        
         public function showTweets() {
-            $sql = "SELECT * FROM tweets t INNER JOIN users u ON t.user_id = u.id";
+            $sql = "SELECT * FROM tweets t INNER JOIN users u ON t.user_id = u.id ORDER BY t.id DESC";
             $stmt = $this->prepare($sql);
             $stmt->execute();
             $stmt->setFetchMode(PDO::FETCH_CLASS, __NAMESPACE__ ."\\{$this->getClassName()}");

@@ -273,10 +273,12 @@ body {
   margin-left: 390px;
 }
 
-.replyButton {
+.replyButton , .retweetButton, .likeButton {
   background-color: transparent;
   border: none;
 }
+
+ 
 
 .imageContainer, .imageContainer img {
     border-top-right-radius: 20px;
@@ -354,4 +356,6 @@ body {
   font-weight: 400;
 }
 
-
+.hidden-template {
+  display: none;
+}
