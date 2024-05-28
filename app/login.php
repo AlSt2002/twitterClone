@@ -44,7 +44,7 @@ require_once "autoloader.php";
             header("Location: index.php");
         }
         else {
-        $session->message("Could not log in");
+            $session->message("Could not log in");
         }
         
     }

@@ -78,7 +78,7 @@ require_once "autoloader.php";
           </div>
 
           <div id="tweets">
-              <div class="container-fluid postContainer border-bottom">
+              <!-- <div class="container-fluid postContainer border-bottom">
                 <form class="post p-4 d-flex gap-2">
                   <div class="background-profile">
                     <img class="h-100" src="img/new-twitter-logo-x-2023-twitter-x-logo-official-vector-download_691560-10797.avif" alt="img">
@@ -170,7 +170,7 @@ require_once "autoloader.php";
                     </div>
                   </div>
                 </form>
-              </div>
+              </div> -->
 
           </div>
 
@@ -417,9 +417,11 @@ require_once "autoloader.php";
   document.addEventListener('DOMContentLoaded', function() {
       var postButton = document.getElementById('post-button');
       postButton.addEventListener('click', addTweet);
+
   });
 
-    
+
+   
     function addTweet() {
         // get the form
         var form = document.getElementById("whatIsHappening");
@@ -429,9 +431,9 @@ require_once "autoloader.php";
         var formData = new FormData(form);
         formData.append('post', 'Post');
 
-        for([key, value] of formData.entries()) {
-          console.log(key + ": " + value);
-        }
+        // for([key, value] of formData.entries()) {
+        //   console.log(key + ": " + value);
+        // }
 
         var xhr = new XMLHttpRequest();
         xhr.open('POST', url, true);
@@ -439,7 +441,7 @@ require_once "autoloader.php";
           if(xhr.readyState == 4 && xhr.status == 200) {
            
             $('#tweets').load(location.href + " #tweets");
-            showTweets();
+            showTweets(bindbuttons);
             form.reset();
             
           }
@@ -450,20 +452,130 @@ require_once "autoloader.php";
     }
    
 
-    function showTweets() {
+    function showTweets(callbackFn) {
       
       var xhr = new XMLHttpRequest();
         xhr.open('GET', 'Tweets.php', true);
         xhr.onreadystatechange = function() {
             if(xhr.readyState == 4 && xhr.status == 200) {
                 showPosts(xhr.responseText);
+                callbackFn();
             }
         }
         xhr.send();
     }
 
+      
+
+    function like() {
+
+      console.log('It is working');
+
+      var post = this.parentElement.
+      parentElement.parentElement.
+      parentElement.parentElement;
+      
+      var tweetID =  post.id;
+
+       var url = 'Likes.php?tweetID=' + tweetID;
+       
+
+      var xhr = new XMLHttpRequest();
+      xhr.open('POST', url, true);
+      xhr.onreadystatechange = function() {
+        if(xhr.readyState == 4 && xhr.status == 200) {
+            //console.log(xhr.responseText);
+            //window.location.href = url;
+           
+        }
+      }
+     
+      xhr.send();
+    }
+
+
+
+
+    function userInfo() {
+
+      return new Promise((resolve, reject) => {
+      var  url = "UserInfo.php";
+      var xhr = new XMLHttpRequest();
+        
+        xhr.open('GET', url, true);
+        xhr.onreadystatechange = function () {
+          if(xhr.readyState == 4) {
+              if(xhr.status == 200) {
+                resolve(xhr.responseText);
+              }
+              else {
+                reject("Error getting Id");
+              }
+         
+          }
+        }
+
+        xhr.send();
+      })
+     
+    }
+
+    async function getUserId() {
+      user_id = await userInfo();
+      return user_id;
+    }
+
+   
+
+    function isLiked(user_id, tweet_id) {
+       //user_id = getUserId();
+       //tweet_id = 115;
+      var  url = `Checklikes.php?user_id=${user_id}&tweet_id=${tweet_id}`;
+      var  xhr = new XMLHttpRequest();
+       xhr.open('GET', url, true);
+       xhr.onreadystatechange = function () {
+        if(xhr.readyState == 4 && xhr.status == 200) {
+          if(xhr.responseText == 'true') {
+            console.log("It is liked");
+          } else {
+            console.log("It is not liked");
+          }
+
+          //return xhr.responseText == 'true';
+        }
+       }
+
+       xhr.send();
+      
+    }
+
+
+    function bindbuttons() {
+      
+        var likeButtons = document.querySelectorAll('.likeButton');
+          console.log(likeButtons);
+          for(let i = 0; i < likeButtons.length; i++) {
+            console.log("Binded");
+            likeButtons.item(i).addEventListener('click', like);
+            console.log(likeButtons.item(i));
+          }
+    }
+   
     window.onload = function() {
-        showTweets();
+       
+        showTweets(bindbuttons);
+
+        (async () => {
+          var user_id = await getUserId();
+
+          console.log("User id is: " + user_id);
+
+        })()
+
+
+      
+      
+
     }
 
   </script>

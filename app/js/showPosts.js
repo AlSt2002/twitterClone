@@ -4,10 +4,11 @@ function showPosts(responseText) {
     const tweetsContainer = document.getElementById('tweets');
     let result = JSON.parse(responseText);
 
-    for(tweet of result) {
-        
-        let postContainer = document.createElement('div');
+    result.forEach(async (tweet) => {
+
+      let postContainer = document.createElement('div');
         postContainer.classList.add('container-fluid', 'postContainer', 'border-bottom');
+        postContainer.setAttribute('id', `tweet-${tweet.id}`);
         tweetsContainer.append(postContainer);
         let form = document.createElement('form');
         form.classList.add('post', 'p-4', 'd-flex', 'gap-2');
@@ -104,6 +105,8 @@ function showPosts(responseText) {
 
       postAndInfo.appendChild(replyRetweet);
 
-    }
+
+    });
+
 
 }

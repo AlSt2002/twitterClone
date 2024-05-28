@@ -5,6 +5,7 @@ namespace App\Lib;
 use App\Lib\Database;
 use JsonSerializable;
 use PDO;
+use PDOException;
 
     class Tweet extends Database implements JsonSerializable {
 
@@ -56,16 +57,22 @@ use PDO;
             return get_object_vars($this);
         }
 
-        
-        public function showTweets() {
-            $sql = "SELECT * FROM tweets t INNER JOIN users u ON t.user_id = u.id ORDER BY t.id DESC";
-            $stmt = $this->prepare($sql);
-            $stmt->execute();
-            $stmt->setFetchMode(PDO::FETCH_CLASS, __NAMESPACE__ ."\\{$this->getClassName()}");
 
+        public function getLikes() {
+
+           try {
+            $sql = "SELECT * FROM likes WHERE tweet_id=:tweet_id";
+            $stmt = $this->prepare($sql);
+            $stmt->bindParam(':tweet_id', $this->id);
+            $stmt->execute();
+            $stmt->setFetchMode(PDO::FETCH_CLASS, __NAMESPACE__ . "\\Like");
             return $stmt->fetchAll();
+           } catch (\Throwable $th) {
+                $th->getMessage();
+           }
 
         }
+        
     }
 
 

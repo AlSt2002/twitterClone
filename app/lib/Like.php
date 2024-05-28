@@ -3,6 +3,7 @@
 namespace App\Lib;
 
 use App\Lib\Database;
+use PDO;
 
 
 class Like extends Database {
@@ -48,6 +49,31 @@ class Like extends Database {
     public function setTweet_id($tweet_id)
     {
         $this->tweet_id = $tweet_id;
+    }
+
+
+    public function isLiked($user_id, $tweet_id) {
+
+        try {
+
+            $sql = "SELECT * FROM likes WHERE user_id=:user_id && tweet_id=:tweet_id";
+            $stmt = $this->prepare($sql);
+            $stmt->bindParam(":user_id", $user_id);
+            $stmt->bindParam(":tweet_id", $tweet_id);
+            $stmt->execute();
+            $stmt->setFetchMode(PDO::FETCH_CLASS, __NAMESPACE__ . "\\{$this->getClassName()}");
+    
+            if($stmt->fetch()) {
+                return true;
+            } else {
+                return false;
+            }
+    
+        } catch (\Throwable $th) {
+           $th->getMessage();
+        }
+       
+
     }
 }
 

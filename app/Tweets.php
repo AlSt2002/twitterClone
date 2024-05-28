@@ -10,11 +10,12 @@ $tweet = new Tweet();
 
 $result  = [];
 
-$tweets = $tweet->showTweets();
+$tweets = $tweet->find_all();
 
     foreach($tweets as $tweet) {
         $user = new User();
         $user = $user->find_id($tweet->getUser_id());
+       
        
         $result[] = 
         [
@@ -27,7 +28,10 @@ $tweets = $tweet->showTweets();
                 
             ], 
 
-            'tweetText' => $tweet->getTweetText()
+            'id' => $tweet->getId() ,
+
+            'tweetText' => $tweet->getTweetText(),
+            'likes' => count($tweet->getLikes())
 
             
         
@@ -39,8 +43,9 @@ $tweets = $tweet->showTweets();
 
     header('Content-Type: application/json; charset=utf-8');
 
+   
 
-    echo json_encode($result);
+    echo json_encode( array_reverse($result));
 
 
 

@@ -72,6 +72,14 @@ abstract class Database {
 
     }
 
+
+    public function find_all() {
+        $sql = "SELECT * FROM ". static::$db_table;
+        $stmt = $this->prepare($sql);
+        $stmt->execute();
+        $stmt->setFetchMode(PDO::FETCH_CLASS, __NAMESPACE__ . "\\{$this->getClassName()}");
+        return $stmt->fetchAll();
+    }
    
 
     public function create() {
@@ -95,8 +103,25 @@ abstract class Database {
     }
 
 
+    public function delete() {
+        try{
+            $sql="DELETE FROM "  .static::$db_table. " WHERE id=:id";
+            $stmt=$this->prepare($sql);
+            $stmt->bindParam(':id', $this->id, PDO::PARAM_INT);
+            $stmt->execute();
+            echo "{$this->getClassName()} deleted successfully";
+        }
+        catch(PDOException $e){
+            echo "Error in {$this->getClassName()} deletion process " . $e->getMessage();
+        }
+    }
 
-} 
+
+}
+
+
+
+
 
 
 
