@@ -98,7 +98,7 @@ function showPosts(responseText) {
         let like_paragraph = document.createElement('p');
         like_paragraph.setAttribute('id', 'noOfPosts');
         like_paragraph.classList.add('mb-0', 'align-self-center');
-        like_paragraph.textContent = "11K";
+        like_paragraph.textContent = tweet.likes;
 
         like.appendChild(like_paragraph);
         replyRetweet.appendChild(like);

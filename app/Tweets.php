@@ -45,7 +45,7 @@ $tweets = $tweet->find_all();
 
    
 
-    echo json_encode( array_reverse($result));
+    echo json_encode(array_reverse($result));
 
 
 

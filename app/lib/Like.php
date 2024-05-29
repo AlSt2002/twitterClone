@@ -63,11 +63,7 @@ class Like extends Database {
             $stmt->execute();
             $stmt->setFetchMode(PDO::FETCH_CLASS, __NAMESPACE__ . "\\{$this->getClassName()}");
     
-            if($stmt->fetch()) {
-                return true;
-            } else {
-                return false;
-            }
+            return $stmt->fetch();
     
         } catch (\Throwable $th) {
            $th->getMessage();

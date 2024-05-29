@@ -96,7 +96,7 @@ abstract class Database {
                 $stmt->bindParam(':'.$value, $p[$value]);
             }
             $stmt->execute();
-            echo "{$this->getClassName()} added successfully";
+            //echo "{$this->getClassName()} added successfully";
         } catch (PDOException $e) {
             echo "Error in {$this->getClassName()} registration process " . $e->getMessage();
         }
@@ -109,10 +109,10 @@ abstract class Database {
             $stmt=$this->prepare($sql);
             $stmt->bindParam(':id', $this->id, PDO::PARAM_INT);
             $stmt->execute();
-            echo "{$this->getClassName()} deleted successfully";
+            //echo "{$this->getClassName()} deleted successfully";
         }
         catch(PDOException $e){
-            echo "Error in {$this->getClassName()} deletion process " . $e->getMessage();
+            //echo "Error in {$this->getClassName()} deletion process " . $e->getMessage();
         }
     }
 

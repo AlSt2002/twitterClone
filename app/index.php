@@ -401,6 +401,12 @@ require_once "autoloader.php";
         <svg class="likebutton" viewBox="0 0 24 24" aria-hidden="true" class="r-4qtqp9 r-yyyyoo r-dnmrzs r-bnwqim r-1plcrui r-lrvibr r-1xvli5t r-1hdv0qi"><g><path d="M4.5 3.88l4.432 4.14-1.364 1.46L5.5 7.55V16c0 1.1.896 2 2 2H13v2H7.5c-2.209 0-4-1.79-4-4V7.55L1.432 9.48.068 8.02 4.5 3.88zM16.5 6H11V4h5.5c2.209 0 4 1.79 4 4v8.45l2.068-1.93 1.364 1.46-4.432 4.14-4.432-4.14 1.364-1.46 2.068 1.93V8c0-1.1-.896-2-2-2z"></path></g></svg>
 
         <svg class="likebutton" viewBox="0 0 24 24" aria-hidden="true" class="r-4qtqp9 r-yyyyoo r-dnmrzs r-bnwqim r-1plcrui r-lrvibr r-1xvli5t r-1hdv0qi"><g><path d="M16.697 5.5c-1.222-.06-2.679.51-3.89 2.16l-.805 1.09-.806-1.09C9.984 6.01 8.526 5.44 7.304 5.5c-1.243.07-2.349.78-2.91 1.91-.552 1.12-.633 2.78.479 4.82 1.074 1.97 3.257 4.27 7.129 6.61 3.87-2.34 6.052-4.64 7.126-6.61 1.111-2.04 1.03-3.7.477-4.82-.561-1.13-1.666-1.84-2.908-1.91zm4.187 7.69c-1.351 2.48-4.001 5.12-8.379 7.67l-.503.3-.504-.3c-4.379-2.55-7.029-5.19-8.382-7.67-1.36-2.5-1.41-4.86-.514-6.67.887-1.79 2.647-2.91 4.601-3.01 1.651-.09 3.368.56 4.798 2.01 1.429-1.45 3.146-2.1 4.796-2.01 1.954.1 3.714 1.22 4.601 3.01.896 1.81.846 4.17-.514 6.67z"></path></g></svg>
+        <svg class="likebtn" viewBox="0 0 24 24" aria-hidden="true">
+          <g>
+            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+          </g>
+        </svg>
+
     </div>
 
     <script src="js/jquery-3.3.1.slim.min.js"></script>
@@ -469,31 +475,54 @@ require_once "autoloader.php";
 
     function like() {
 
-      console.log('It is working');
-
       var post = this.parentElement.
       parentElement.parentElement.
       parentElement.parentElement;
       
       var tweetID =  post.id;
+      console.log(tweetID);
 
        var url = 'Likes.php?tweetID=' + tweetID;
-       
+
+       var p = this.nextElementSibling;
+       var mybutton_svg = this.firstElementChild;
+       console.log(mybutton_svg);
+
 
       var xhr = new XMLHttpRequest();
       xhr.open('POST', url, true);
       xhr.onreadystatechange = function() {
-        if(xhr.readyState == 4 && xhr.status == 200) {
-            //console.log(xhr.responseText);
-            //window.location.href = url;
-           
+        if(xhr.readyState == 4) {
+            if(xhr.status == 200) {
+              
+              var json =JSON.parse(xhr.responseText);
+              if(json[0].result == 'true') {
+                var numLikes = parseInt(p.innerHTML) + 1;
+                p.innerHTML = numLikes;
+                mybutton_svg.style.fill = 'red';
+               
+              }
+              else {
+                var numLikes = parseInt(p.innerHTML) - 1;
+                p.innerHTML = numLikes;
+                mybutton_svg.style.fill = 'black';
+                
+              }
+              
+            } 
         }
       }
      
       xhr.send();
     }
 
-
+    function handleLike(responseText) {
+      var json = JSON.parse(responseText);
+     
+      if(json[0].result == 'true') {
+        console.log(p);
+      }
+    }
 
 
     function userInfo() {

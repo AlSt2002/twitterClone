@@ -9,24 +9,41 @@ include "autoloader.php";
 
 if(isset($_GET['tweetID'])) {
     $raw_id = $_GET['tweetID'];
-    echo $raw_id;
-    echo "<br>";
+    //echo $raw_id;
+    //echo "<br>";
     $id = preg_match('/tweet-(\d+)/', $raw_id, $matches);
     $tweet_id = $matches[1];
-    echo $tweet_id;
-    echo "<br>";
+    //echo $tweet_id;
+    //echo "<br>";
     $tweet = new Tweet();
     $tweet = $tweet->find_id($tweet_id);
+    $like = new Like();
 
-    header('Content-Type: application/json; charset=utf-8');
+    $success = [];
 
-    json_encode(print_r($tweet->getLikes()));
+    if($like->isLiked($tweet->getUser_id(), $tweet->getId())) {
+      
+        $like = $like->isLiked($tweet->getUser_id(), $tweet->getId());
+        $like->delete();
+        $success[] = ['result' => 'false'];
+        echo json_encode($success);
+      
+
+    } else {
+      
+        $like->setUser_id($tweet->getUser_id());
+        $like->setTweet_id($tweet->getId());
+        $like->create();
+        $success[] = ['result' => 'true'];
+        echo json_encode($success);
+
+
+    }
+
+   
 
 }
-else{
-    echo $_GET['tweetID'];
-    echo "Id not set";
-}
+
 
 
 ?>
