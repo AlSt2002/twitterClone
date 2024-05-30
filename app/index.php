@@ -572,6 +572,38 @@ require_once "autoloader.php";
 
     }
 
+    function uptate_likes(responseText) {
+      var result = JSON.parse(responseText);
+
+      
+      for(tweet of result) {
+        var tweetByid = document.getElementById(`tweet-${tweet.id}`);
+        
+        var form = tweetByid.children[0];
+        var postAndInfo = form.children[1];
+        var replyRetweet = postAndInfo.children[2];
+        var parentLikes = replyRetweet.children[2];
+        var noOfLikes = parentLikes.children[1];
+
+        noOfLikes.textContent = tweet.likes;
+
+        
+
+      }
+    }
+
+    function updateLikes() {
+      var xhr = new XMLHttpRequest();
+      xhr.open('GET', 'Tweets.php', true);
+      xhr.onreadystatechange = function () {
+        if(xhr.readyState == 4 && xhr.status == 200) {
+          uptate_likes(xhr.responseText);
+        }
+
+      }
+      xhr.send();
+    }
+
 
     function bindbuttons() {
       
@@ -591,18 +623,12 @@ require_once "autoloader.php";
         (async () => {
           var user_id = await getUserId();
 
-          //console.log("User id is: " + user_id);
 
         })()
 
-        // markLiked();
+        setInterval(updateLikes, 5000);
 
-
-        // const promise = Promise.resolve(true);
-        // promise.then((value) => {
-        //   console.log(typeof(value));
-        // });
-
+       
       
       
 
