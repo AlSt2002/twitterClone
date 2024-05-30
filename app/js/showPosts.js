@@ -92,6 +92,7 @@ function showPosts(responseText) {
         likeButton.classList.add('likeButton');
         let like_svg = svgTemplate.children[2].cloneNode(true);
 
+
         likeButton.appendChild(like_svg);
         like.appendChild(likeButton);
 
@@ -104,6 +105,22 @@ function showPosts(responseText) {
         replyRetweet.appendChild(like);
 
       postAndInfo.appendChild(replyRetweet);
+
+
+
+      try {
+        var uId = await getUserId();
+        console.log("user id : "+ uId);
+        var r = await isLiked(uId, tweet.id);
+        if(r) {
+         like_svg.style.fill = 'red';
+        }
+      
+      } catch (error) {
+        console.log(error);
+      }
+
+      
 
 
     });

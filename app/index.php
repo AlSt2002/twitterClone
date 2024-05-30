@@ -174,10 +174,6 @@ require_once "autoloader.php";
 
           </div>
 
-          
-
-          
-
         </article>
       </section>
 
@@ -516,13 +512,6 @@ require_once "autoloader.php";
       xhr.send();
     }
 
-    function handleLike(responseText) {
-      var json = JSON.parse(responseText);
-     
-      if(json[0].result == 'true') {
-        console.log(p);
-      }
-    }
 
 
     function userInfo() {
@@ -554,28 +543,33 @@ require_once "autoloader.php";
       return user_id;
     }
 
-   
+
 
     function isLiked(user_id, tweet_id) {
-       //user_id = getUserId();
-       //tweet_id = 115;
-      var  url = `Checklikes.php?user_id=${user_id}&tweet_id=${tweet_id}`;
-      var  xhr = new XMLHttpRequest();
-       xhr.open('GET', url, true);
-       xhr.onreadystatechange = function () {
-        if(xhr.readyState == 4 && xhr.status == 200) {
-          if(xhr.responseText == 'true') {
-            console.log("It is liked");
-          } else {
-            console.log("It is not liked");
+     
+      return new Promise((resolve, reject) =>{
+        var  url = `Checklikes.php?user_id=${user_id}&tweet_id=${tweet_id}`;
+        var  xhr = new XMLHttpRequest();
+        xhr.open('GET', url, true);
+        xhr.onreadystatechange = function() {
+          if(xhr.readyState == 4) {
+            if(xhr.status == 200) {
+              console.log(xhr.responseText);
+              console.log(xhr.responseText == "true");
+              if(xhr.responseText == 'true') {
+                
+                resolve(true);
+              }
+              else {
+                reject(false);
+              }
+            }
           }
-
-          //return xhr.responseText == 'true';
         }
-       }
 
-       xhr.send();
-      
+        xhr.send();
+      });
+
     }
 
 
@@ -597,10 +591,17 @@ require_once "autoloader.php";
         (async () => {
           var user_id = await getUserId();
 
-          console.log("User id is: " + user_id);
+          //console.log("User id is: " + user_id);
 
         })()
 
+        // markLiked();
+
+
+        // const promise = Promise.resolve(true);
+        // promise.then((value) => {
+        //   console.log(typeof(value));
+        // });
 
       
       
