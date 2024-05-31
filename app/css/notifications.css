@@ -1,0 +1,39 @@
+.main-part-notifications {
+    width: 78%;
+}
+
+.main-part-notifications .main-section{
+    width: 642px;
+}
+
+.notifications-title {
+    height: 53px;
+}
+
+.notifications-title .notification-h2 {
+    font-size: 20px;
+    font-family: TwitterChirp, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+.notifications-title .settings-icon{
+    height: 20px;
+    display: block;
+}
+
+.settings-link-container {
+    height: 30px;
+    width: 30px;
+    padding-top: 5px;
+    padding-left: 5px;
+    border-radius: 50%;
+  
+}
+
+.settings-link-container:hover {
+  background-color: rgba(15, 20, 25, 0.1); 
+     opacity: .4;
+}
+
+
+
+  

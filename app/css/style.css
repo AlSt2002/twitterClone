@@ -144,6 +144,11 @@ body {
   color: black;
 }
 
+.postContainer .postAndInfo{
+  word-wrap: break-word;
+  width: 80%;
+}
+
 .premium {
   width: 387px;
   height: 596px;

@@ -81,7 +81,7 @@
           <li class="nav-item mb-2 position-relative">
             <a
               class="nav-link d-flex align-items-center custom-link"
-              href="#4"
+              href="notifications.php"
               id="link"
             >
               <svg
