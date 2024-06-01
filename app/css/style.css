@@ -123,6 +123,7 @@ body {
 
 .grid-container {
   height: 3.3125rem;
+  backdrop-filter: blur(15px);
 }
 
 .nav2-link {

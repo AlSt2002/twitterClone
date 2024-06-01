@@ -18,9 +18,10 @@ require_once 'autoloader.php';
         include "inc/header.php";    
     ?>
 
-    <main class="container-sm-fluid d-flex flex-grow-1 flex-lg-grow-0 main-part-notifications overflow-y-auto overflow-x-hidden border-end">
-      <section class="main-section flex-grow-1">
-        <div class="notifications-title d-flex ps-3 pe-3 pt-1 align-items-center">
+    <main class="container-sm-fluid d-flex flex-grow-1 flex-lg-grow-0 main-part-notifications overflow-x-hidden border-end position-relative">
+      <section class="main-section flex-grow-1" id="notification-section">
+        <div class="notifications-wrapper position-sticky top-0">
+        <div class="notifications-title d-flex ps-3 pe-3 pt-1 align-items-center position-sticky top-0">
             <h2 class="fw-bolder notification-h2 flex-grow-1">Notifications</h2>
            
             <div class="settings-link-container">
@@ -34,11 +35,75 @@ require_once 'autoloader.php';
                     </div>
                 </a>
             </div>
-           
-
-
-           
         </div>
+
+        <nav class="navbar navbar-expand position-sticky" id="notifications-navbar">
+            <div class="container nav-items-container border-bottom">
+                <div class="row w-100 h-100 align-content-center">
+                    <div class="col d-flex justify-content-center h-100">
+                        <a href="#" id="all-link" class="nav2-link notification-link w-100 h-100 text-center pt-3">All</a>
+                    </div>
+                    <div class="col d-flex justify-content-center">
+                        <a href="#" class="nav2-link notification-link w-100 h-100 text-center pt-3">Verified</a>
+                    </div>
+                    <div class="col d-flex justify-content-center">
+                        <a href="#" class="nav2-link notification-link w-100 h-100 text-center pt-3">Mentions</a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+
+        </div>
+        
+
+        <div class="all-div" id="all-div">
+
+        <svg class="likebtn" viewBox="0 0 24 24" aria-hidden="true">
+          <g>
+            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+          </g>
+        </svg>
+
+        </div>
+
+
       </section>
       <?php include 'inc/aside.php'; ?>
+
+
+      <script>
+
+        function clickL() {
+            var links = document.getElementsByClassName('notification-link');
+            for(let i = 0; i < links.length; i++) {
+                links.item(i).classList.remove('active');
+            }
+            this.classList.add('active');
+        }
+
+
+        var link_buttons = document.getElementsByClassName('notification-link');
+        for(let i = 0; i < link_buttons.length; i++) {
+            link_buttons.item(i).addEventListener('click', clickL);
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const all_link = document.getElementById("all-link");
+            all_link.click();
+        })
+
+        // function blur() {
+        //     var scrollAmount = this.scrollTop;
+        //     var units = scrollAmount / 2;
+        //     var change = units * 0.1;
+
+        //     let newOpacity = 1 - change;
+
+        // }
+
+      
+      </script>
     </main>
+</body>
+

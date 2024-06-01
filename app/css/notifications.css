@@ -4,10 +4,13 @@
 
 .main-part-notifications .main-section{
     width: 642px;
+    height: 596px;
+    overflow-x: hidden;
 }
 
 .notifications-title {
     height: 53px;
+    /* backdrop-filter: blur(15px);  */
 }
 
 .notifications-title .notification-h2 {
@@ -34,6 +37,28 @@
      opacity: .4;
 }
 
+.nav-items-container {
+    height: 3.3125rem;
+}
+
+.notification-link.active {
+    text-decoration-line: underline;
+    text-decoration-thickness: 4px;
+    text-decoration-color: #1d9bf0;
+    text-underline-offset: 17px;
+    font-weight: bold;
+    color: black;
+}
+
+#notifications-navbar {
+    top:53px;
+    /* backdrop-filter: blur(15px); */
+    padding-bottom: 0px;
+}
+
+.notifications-wrapper{
+    backdrop-filter: blur(15px);
+}
 
 
   
