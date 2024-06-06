@@ -49,13 +49,13 @@ body {
   border-bottom-right-radius: 99px;
 }
 
-#link svg {
+.custom-link svg {
   margin-right: 10px;
   height: 21px;
   width: 22px;
 }
 
-#link span {
+.custom-link span {
   font-family: "Roboto", sans-serif;
   font-size: x-large;
 }
@@ -367,3 +367,17 @@ body {
 }
 
 
+.number-of-notifications {
+  height: 16px;
+  width: 16px;
+  border-radius: 50%;
+  color: white;
+  background-color: #1d9bf0;
+  top: 7px;
+  left: 10px;
+  
+}
+
+.number-of-notifications .num {
+  font-size: 12px;
+}

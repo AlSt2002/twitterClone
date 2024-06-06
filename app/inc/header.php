@@ -42,7 +42,7 @@
             <a
               class="nav-link d-flex align-items-center custom-link"
               href="#2"
-              id="link"
+              id="home-link"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -62,7 +62,7 @@
             <a
               class="nav-link d-flex align-items-center custom-link"
               href="#3"
-              id="link"
+              id="explore-link"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -82,8 +82,11 @@
             <a
               class="nav-link d-flex align-items-center custom-link"
               href="notifications.php"
-              id="link"
+              id="notifications-link"
             >
+              <div class="position-absolute d-flex justify-content-center align-content-center">
+                <p class="num"></p>
+              </div>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 height="16"
@@ -102,7 +105,7 @@
             <a
               class="nav-link d-flex align-items-center custom-link"
               href="#5"
-              id="link"
+              id="messages-link"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -122,7 +125,7 @@
             <a
               class="nav-link d-flex align-items-center custom-link"
               href="profile.php?userid=<?php echo $session->userId;?>" 
-              id="link"
+              id="profile-link"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -142,7 +145,7 @@
             <a
               class="nav-link d-flex align-items-center custom-link"
               href="#"
-              id="link"
+              id="more-link"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"

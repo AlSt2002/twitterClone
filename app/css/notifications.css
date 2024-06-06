@@ -10,7 +10,7 @@
 
 .notifications-title {
     height: 53px;
-    /* backdrop-filter: blur(15px);  */
+   
 }
 
 .notifications-title .notification-h2 {
@@ -52,7 +52,7 @@
 
 #notifications-navbar {
     top:53px;
-    /* backdrop-filter: blur(15px); */
+   
     padding-bottom: 0px;
 }
 
@@ -60,5 +60,15 @@
     backdrop-filter: blur(15px);
 }
 
+.all-div .like-sign {
+    fill: red;
+    height: 2.1875rem;
+    
+}
 
+.circle-notifications {
+    height: 2.1875rem;
+    width: 2.1875rem;
+}
   
+
