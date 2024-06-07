@@ -238,15 +238,10 @@ require_once 'autoloader.php';
             all_link.click();
         })
 
-        // function blur() {
-        //     var scrollAmount = this.scrollTop;
-        //     var units = scrollAmount / 2;
-        //     var change = units * 0.1;
-
-        //     let newOpacity = 1 - change;
-
-        // }
-
+       
+        function showNotifications() {
+            
+        }
       
       </script>
     </main>

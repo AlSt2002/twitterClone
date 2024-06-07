@@ -121,8 +121,6 @@ function showPosts(responseText) {
       }
 
       
-
-
     });
 
 

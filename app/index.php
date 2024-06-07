@@ -204,7 +204,9 @@ require_once "autoloader.php";
     <script src="js/bootstrap.min.js"></script>
     <script src="js/script.js"></script>
     <script src="js/jquery-3.6.0.js"></script>
+    <script src="js/userinfo.js"></script>
     <script src="js/showPosts.js"></script>
+    <script src="js/unreadnotifications.js"></script>
    
 
 
@@ -307,38 +309,6 @@ require_once "autoloader.php";
     }
 
 
-
-    function userInfo() {
-
-      return new Promise((resolve, reject) => {
-      var  url = "UserInfo.php";
-      var xhr = new XMLHttpRequest();
-        
-        xhr.open('GET', url, true);
-        xhr.onreadystatechange = function () {
-          if(xhr.readyState == 4) {
-              if(xhr.status == 200) {
-                resolve(xhr.responseText);
-              }
-              else {
-                reject("Error getting Id");
-              }
-         
-          }
-        }
-
-        xhr.send();
-      })
-     
-    }
-
-    async function getUserId() {
-      user_id = await userInfo();
-      return user_id;
-    }
-
-
-
     function isLiked(user_id, tweet_id) {
      
       return new Promise((resolve, reject) =>{
@@ -369,7 +339,6 @@ require_once "autoloader.php";
     function uptate_likes(responseText) {
       var result = JSON.parse(responseText);
 
-      
       for(tweet of result) {
         var tweetByid = document.getElementById(`tweet-${tweet.id}`);
         
@@ -410,33 +379,6 @@ require_once "autoloader.php";
           }
     }
 
-
-    function getNumberOfUnreadNotifications() {
-
-      var notification_link = document.getElementById('notifications-link');
-      var numberOfNotifications = notification_link.children[0];
-      var number = numberOfNotifications.children[0];
-
-      (async () => {
-          userId = await getUserId();
-          var xhr = new XMLHttpRequest();
-          var url = `NotificationsDb.php?userId=${userId}`;
-          xhr.open('GET', url, true);
-          xhr.onreadystatechange = function () {
-          if(xhr.readyState == 4) {
-            if(xhr.status == 200) {
-              var json = JSON.parse(xhr.responseText);
-              numberOfNotifications.classList.add('number-of-notifications');
-              number.innerHTML = json.length;
-            }
-          }
-        }
-        xhr.send();
-      })()
-
-     
-    }
-    
    
     window.onload = function() {
        

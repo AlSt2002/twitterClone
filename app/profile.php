@@ -74,10 +74,14 @@ require_once "autoloader.php";
         </section>
     </main>
 
+    <script src="js/userinfo.js"></script>
+    <script src="js/unreadnotifications.js"></script>
 
 
 
-
+    <script>
+        setInterval(getNumberOfUnreadNotifications, 1000);
+    </script>
 </body>
 
   
