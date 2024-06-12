@@ -80,10 +80,23 @@ function showPosts(responseText) {
         let retweet_paragraph = document.createElement('p');
         retweet_paragraph.setAttribute('id', 'noOfPosts');
         retweet_paragraph.classList.add('mb-0', 'align-self-center');
-        retweet_paragraph.textContent = "11K";
+        retweet_paragraph.textContent = tweet.retweets;
 
         retweet.appendChild(retweet_paragraph);
         replyRetweet.appendChild(retweet);
+
+
+        
+      try {
+        var userID = await getUserId();
+        var isRetweeted  = await isRetweeted(userID, tweet.id);
+        if(isRetweeted) {
+          retweet_svg.style.fill = 'green';
+        }
+      } catch (error) {
+        console.log(error);
+      }
+      
 
 
         let like = document.createElement('div');
@@ -120,8 +133,10 @@ function showPosts(responseText) {
         console.log(error);
       }
 
-      
+
     });
+
+   
 
 
 }

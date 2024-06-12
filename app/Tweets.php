@@ -31,7 +31,8 @@ $tweets = $tweet->find_all();
             'id' => $tweet->getId() ,
 
             'tweetText' => $tweet->getTweetText(),
-            'likes' => count($tweet->getLikes())
+            'likes' => count($tweet->getLikes()),
+            'retweets' => count($tweet->getRetweets())
 
             
         

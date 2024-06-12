@@ -72,6 +72,22 @@ use PDOException;
            }
 
         }
+
+        public function getRetweets() {
+
+            try {
+             $sql = "SELECT * FROM retweets WHERE tweet_id=:tweet_id";
+             $stmt = $this->prepare($sql);
+             $stmt->bindParam(':tweet_id', $this->id);
+             $stmt->execute();
+             $stmt->setFetchMode(PDO::FETCH_CLASS, __NAMESPACE__ . "\\Retweet");
+             return $stmt->fetchAll();
+            } catch (\Throwable $th) {
+                 $th->getMessage();
+            }
+ 
+         }
+
         
     }
 
